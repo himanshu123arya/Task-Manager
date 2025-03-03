@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color:yellowgreen;
+            font-size:35px;
+        }
+        .task {
+            background: #ddd;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            cursor: pointer;
+            padding: 5px 10px;
+            border: none;
+            background: red;
+            color: white;
+            border-radius: 5px;
+        }
+        #taskInput {
+            padding: 8px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Task Manager</h2>
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button id="addTaskBtn">Add Task</button>
+        <div id="taskList"></div>
+    </div>
+
+    <script>
+        document.getElementById("addTaskBtn").addEventListener("click", addTask);
+
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let taskText = input.value.trim();
+            if (taskText === "") return;
+
+            let taskDiv = document.createElement("div");
+            taskDiv.className = "task";
+
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "X";
+            removeBtn.setAttribute("aria-label", "Remove task");
+            removeBtn.addEventListener("click", () => taskDiv.remove());
+
+            taskDiv.appendChild(taskSpan);
+            taskDiv.appendChild(removeBtn);
+            document.getElementById("taskList").appendChild(taskDiv);
+
+            input.value = ""; 
+        }
+    </script>
+</body>
+</html>
